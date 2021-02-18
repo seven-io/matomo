@@ -1,0 +1,28 @@
+{
+    "authors": [
+        {
+            "email": "support@sms77.io",
+            "homepage": "https://sms77.io",
+            "name": "Sms77 e.K."
+        }
+    ],
+    "description": "Send SMS via Sms77.io",
+    "homepage": "https://sms77.io",
+    "keywords": [
+        "sms"
+    ],
+    "license": "GPL v3+",
+    "name": "Sms77",
+    "theme": false,
+    "require": {
+        "matomo": ">=4.1.1,<5.0.0-b1"
+    },
+    "support": {
+        "docs": "https://www.sms77.io/en/docs/gateway/http-api/sms-disptach/",
+        "email": "support@sms77.io",
+        "issues": "https://github.com/sms77io/matomo/issues",
+        "rss": "https://www.sms77.io/de/feed/",
+        "source": "https://github.com/sms77io/matomo"
+    },
+    "version": "1.0.0"
+}
