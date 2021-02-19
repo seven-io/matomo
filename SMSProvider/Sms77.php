@@ -58,7 +58,22 @@ class Sms77 extends SMSProvider {
             throw new APIException('API key can not be empty.');
         }
 
-        return 900 != $this->getCreditLeft($credentials);
+        return 100 == $this->sms(
+            $credentials, 'HI2U', '+490123456789', 'Matomo', true);
+    }
+
+    /**
+     * @param array $credentials Array containing credentials
+     * @param string $text The actual message content
+     * @param string $to The recipient(s) separated by comma
+     * @param string|null $from Optional caller ID
+     * @param boolean $debug Don't send out messages
+     * @return mixed
+     * @throws Exception
+     */
+    private function sms($credentials, $text, $to, $from, $debug = false) {
+        return $this->request('POST', 'sms', $credentials,
+            compact('debug', 'from', 'text', 'to'));
     }
 
     /**
@@ -123,7 +138,6 @@ class Sms77 extends SMSProvider {
      * @throws Exception
      */
     public function sendSMS($credentials, $text, $to, $from) {
-        $this->request('POST', 'sms', $credentials,
-            compact('from', 'text', 'to'));
+        $this->sms(compact('credentials', 'from', 'text', 'to'));
     }
 }
