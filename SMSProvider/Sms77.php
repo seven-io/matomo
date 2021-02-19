@@ -78,11 +78,11 @@ class Sms77 extends SMSProvider {
 
     /**
      * @param array $credentials Array containing credentials
-     * @return float
+     * @return string
      * @throws Exception
      */
     public function getCreditLeft($credentials) {
-        return $this->request('GET', 'balance', $credentials);
+        return $this->request('GET', 'balance', $credentials) . ' €';
     }
 
     /**
