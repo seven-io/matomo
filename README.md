@@ -17,7 +17,7 @@ going through the following steps:
 2. Extract the archive contents to /plugins relative to your Matomo installation path
 3. Go to `Settings -> System -> Plugins` and activate the plugin named `Sms77`
 4. [Add a new SMS provider](screenshots/add_sms_provider.png)
-5. [Add a new phone provider](screenshots/add_phone_number.png)
+5. [Add a new phone number](screenshots/add_phone_number.png)
 6. [Validate the phone number](screenshots/validate_phone_number.png)
 7. [Create a report](screenshots/create_report.png)
 8. Test the workflow by clicking `Send Report now` in

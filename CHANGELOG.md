@@ -1,5 +1,9 @@
 ## Changelog
 
+v1.1.1
+
+- fixed typo in README
+
 v1.1.0
 
 - getCreditLeft return balance with currency sign
