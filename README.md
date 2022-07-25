@@ -8,8 +8,7 @@ Send SMS Reports from Matomo via Sms77.io
 
 ### Installation
 
-Until the plugin is available to install from
-the [marketplace](https://plugins.matomo.org/), you will need to install it manually by
+You can install this plugin via the [marketplace](https://plugins.matomo.org/) or manually by
 going through the following steps:
 
 1. Download
@@ -29,4 +28,4 @@ Need help? Feel free to [contact us](https://www.sms77.io/en/company/contact).
 
 ##### License
 
-[![MIT](https://img.shields.io/badge/License-MIT-teal.svg)](./LICENSE)
+[![MIT](https://img.shields.io/badge/License-MIT-teal.svg)](LICENSE)
