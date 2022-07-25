@@ -8,4 +8,17 @@
 namespace Piwik\Plugins\Sms77;
 
 class Sms77 extends \Piwik\Plugin {
+    /**
+     * @see \Piwik\Plugin::registerEvents
+     */
+    public function registerEvents()
+    {
+        return [
+            'Translate.getClientSideTranslationKeys' => 'getClientSideTranslationKeys',
+        ];
+    }
+
+    public function getClientSideTranslationKeys(&$translationKeys) {
+        $translationKeys[] = 'Sms77_ApiKey';
+    }
 }

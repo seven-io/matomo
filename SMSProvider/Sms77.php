@@ -42,7 +42,7 @@ class Sms77 extends SMSProvider {
         return [
             [
                 'name' => 'apiKey',
-                'title' => 'API Key',
+                'title' => 'Sms77_ApiKey',
                 'type' => 'text',
             ],
         ];
@@ -59,7 +59,7 @@ class Sms77 extends SMSProvider {
         }
 
         return 100 == $this->sms(
-            $credentials, 'HI2U', '+490123456789', 'Matomo', true);
+                $credentials, 'HI2U', '+490123456789', 'Matomo', true);
     }
 
     /**
@@ -125,8 +125,6 @@ class Sms77 extends SMSProvider {
             $body
         );
 
-        syslog(LOG_INFO, json_encode($res)); // TODO
-
         return $res;
     }
 
@@ -138,6 +136,6 @@ class Sms77 extends SMSProvider {
      * @throws Exception
      */
     public function sendSMS($credentials, $text, $to, $from) {
-        $this->sms(compact('credentials', 'from', 'text', 'to'));
+        $this->sms($credentials, $text, $to, $from);
     }
 }
