@@ -10,6 +10,7 @@ use Exception;
 use Piwik\Http;
 use Piwik\Plugins\MobileMessaging\APIException;
 use Piwik\Plugins\MobileMessaging\SMSProvider;
+use Piwik\Piwik;
 
 /** Add Sms77 to SMS providers */
 class Sms77 extends SMSProvider {
@@ -22,19 +23,35 @@ class Sms77 extends SMSProvider {
 
     /** @return string */
     public function getDescription() {
-        return 'You can use <a target="_blank" rel="noreferrer noopener" href="https://sms77.io"><img src="plugins/Sms77/images/Sms77.png"/></a> to send SMS Reports from Matomo.<br/>
-			<ul>
-			<li>Sign up at Sms77.io - registration is free and non-binding</li>
-			<li>Copy the API key from the your dashboard</li>
-			<li>Enter the API Key on this page</li>
-			</ul>
-			<br/>About Sms77.io:
-			<ul>
-			<li>Sending millions of SMS since 2003</li>
-			<li>High reliability at low cost</li>
-			<li>Secure operations in Germany based data centers</li>
-			</ul>
-			';
+        return sprintf('
+            %s
+            <br/>
+            <ul>
+                <li>%s</li>
+                <li>%s</li>
+                <li>%s</li>
+            </ul>
+            <br/>
+            %s
+            <ul>
+                <li>%s</li>
+                <li>%s</li>
+                <li>%s</li>
+            </ul>
+        ',
+            Piwik::translate('Sms77_HowTo', '
+            <a href=\'https://www.sms77.io\' rel=\'noreferrer noopener\' target=\'_blank\'>
+                <img alt=\'\' src=\'plugins/Sms77/images/Sms77.png\'/>
+            </a>
+            '),
+            Piwik::translate('Sms77_HowTo1'),
+            Piwik::translate('Sms77_HowTo2'),
+            Piwik::translate('Sms77_HowTo3'),
+            Piwik::translate('Sms77_About'),
+            Piwik::translate('Sms77_About1'),
+            Piwik::translate('Sms77_About2'),
+            Piwik::translate('Sms77_About3'),
+        );
     }
 
     /** @return string[][] */
@@ -55,11 +72,16 @@ class Sms77 extends SMSProvider {
      */
     public function verifyCredential($credentials) {
         if (!isset($credentials['apiKey'])) {
-            throw new APIException('API key can not be empty.');
+            throw new APIException(Piwik::translate('Sms77_ApiKeyMissing'));
         }
 
         return 100 == $this->sms(
-                $credentials, 'HI2U', '+490123456789', 'Matomo', true);
+                $credentials,
+                'HI2U',
+                '+490123456789',
+                'Matomo',
+                true
+            );
     }
 
     /**
@@ -72,8 +94,14 @@ class Sms77 extends SMSProvider {
      * @throws Exception
      */
     private function sms($credentials, $text, $to, $from, $debug = false) {
-        return $this->request('POST', 'sms', $credentials,
-            compact('debug', 'from', 'text', 'to'));
+        $debug = intval($debug);
+
+        return $this->request(
+            'POST',
+            'sms',
+            $credentials,
+            compact('debug', 'from', 'text', 'to')
+        );
     }
 
     /**
@@ -82,7 +110,17 @@ class Sms77 extends SMSProvider {
      * @throws Exception
      */
     public function getCreditLeft($credentials) {
-        return $this->request('GET', 'balance', $credentials) . ' €';
+        $credits = $this->request(
+            'GET',
+            'balance',
+            $credentials
+        );
+
+        if (!is_numeric($credits)  || strpos($credits, '.') === false) {
+            throw new APIException(Piwik::translate('Sms77_ApiKeyError'));
+        }
+
+        return Piwik::translate('MobileMessaging_Available_Credits', array($credits . ' €'));
     }
 
     /**
@@ -94,12 +132,11 @@ class Sms77 extends SMSProvider {
      * @throws Exception
      */
     private function request($method, $endpoint, $credentials, $body = []) {
-        $sentWith = 'matomo';
         $isGet = 'GET' === strtoupper($method);
         $apiKey = $credentials['apiKey'];
         $body['p'] = $apiKey;
-        $body['sentWith'] = $sentWith;
-        $url = "https://gateway.sms77.io/api/$endpoint";
+        $body['sentWith'] = 'matomo';
+        $url = 'https://gateway.sms77.io/api/' . $endpoint;
 
         if ($isGet) {
             $query = http_build_query($body);
@@ -136,6 +173,11 @@ class Sms77 extends SMSProvider {
      * @throws Exception
      */
     public function sendSMS($credentials, $text, $to, $from) {
-        $this->sms($credentials, $text, $to, $from);
+        $this->sms(
+            $credentials,
+            $text,
+            $to,
+            $from
+        );
     }
 }

@@ -1,5 +1,15 @@
 {
     "Sms77": {
-        "ApiKey": "API Key"
+        "About": "About sms77.io:",
+        "About1": "Sending millions of SMS since 2003",
+        "About2": "High reliability at low cost",
+        "About3": "Secure operations in Germany based data centers",
+        "ApiKey": "API Key",
+        "ApiKeyError": "API key wrong or server IP not whitelisted",
+        "ApiKeyMissing": "API key can not be empty.",
+        "HowTo": "You can use %s to send SMS Reports from Matomo.",
+        "HowTo1": "Sign up at sms77.io - registration is free and non-binding",
+        "HowTo2": "Copy the API key from your dashboard",
+        "HowTo3": "Enter the API Key on this page"
     }
 }
