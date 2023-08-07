@@ -1,10 +1,10 @@
-![Sms77.io Logo](https://www.sms77.io/wp-content/uploads/2019/07/sms77-Logo-400x79.png "Sms77.io Logo")
+![](https://www.seven.io/wp-content/uploads/Logo.svg "seven Logo")
 
 # Official Matomo Plugin
 
 ## Description
 
-Send SMS Reports from Matomo via Sms77.io
+Send SMS Reports from Matomo via seven.io
 
 ### Installation
 

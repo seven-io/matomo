@@ -1,6 +1,6 @@
 {
-    "Sms77": {
-        "About": "Über sms77.io:",
+    "Seven": {
+        "About": "Über seven.io:",
         "About1": "Versendet Millionen an SMS seit 2003",
         "About2": "Hohe Zuverlässigkeit bei niedrigen Kosten",
         "About3": "Sichere Kommunikation in Deutschland basierten Rechenzentren",
@@ -8,7 +8,7 @@
         "ApiKeyError": "API-Schlüssel fehlerhaft oder Server-IP nicht auf Whitelist",
         "ApiKeyMissing": "Der API-Schlüssel darf nicht leer sein.",
         "HowTo": "Nutzen Sie %s um SMS-Reports aus Matomo zu versenden.",
-        "HowTo1": "Registrieren Sie sich gratis und unverbindlich auf sms77.io",
+        "HowTo1": "Registrieren Sie sich gratis und unverbindlich auf seven.io",
         "HowTo2": "Kopieren Sie den API-Schlüssel aus Ihrem Dashboard",
         "HowTo3": "Fügen Sie den API-Schlüssel auf dieser Seite ein"
     }
