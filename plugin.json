@@ -3,26 +3,26 @@
         {
             "email": "support@seven.io",
             "homepage": "https://www.seven.io",
-            "name": "sms77 e.K."
+            "name": "seven communications GmbH & Co. KG"
         }
     ],
-    "description": "Send SMS via sms77.io",
-    "homepage": "https://www.sms77.io",
+    "description": "Send SMS via seven.io",
+    "homepage": "https://www.seven.io",
     "keywords": [
         "sms"
     ],
-    "license": "GPL v3+",
-    "name": "Sms77",
+    "license": "MIT",
+    "name": "Seven",
     "theme": false,
     "require": {
-        "matomo": ">=4.1.1,<5.0.0-b1"
+        "matomo": ">=4.1.1,<6.0.0-b1"
     },
     "support": {
-        "docs": "https://www.sms77.io/en/docs/gateway/http-api/sms-disptach/",
-        "email": "support@sms77.io",
+        "docs": "https://www.seven.io/en/docs/gateway/http-api/sms-disptach/",
+        "email": "support@seven.io",
         "issues": "https://github.com/seven-io/matomo/issues",
-        "rss": "https://www.sms77.io/de/feed/",
+        "rss": "https://www.seven.io/en/feed/",
         "source": "https://github.com/seven-io/matomo"
     },
-    "version": "1.3.0"
+    "version": "2.0.0"
 }

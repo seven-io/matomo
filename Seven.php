@@ -1,4 +1,4 @@
-<?php namespace Piwik\Plugins\Sms77;
+<?php namespace Piwik\Plugins\Seven;
 
 class Seven extends \Piwik\Plugin {
     /**

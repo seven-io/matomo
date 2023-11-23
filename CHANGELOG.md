@@ -1,5 +1,10 @@
 ## Changelog
 
+v2.0.0
+
+- Support v5
+- Rebranding
+
 v1.1.1
 
 - fixed typo in README

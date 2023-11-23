@@ -1,10 +1,4 @@
-<?php
-/**
- * Matomo - free/libre analytics platform
- * @link https://matomo.org
- * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- */
-namespace Piwik\Plugins\Sms77\SMSProvider;
+<?php namespace Piwik\Plugins\Seven\SMSProvider;
 
 use Exception;
 use Piwik\Http;
@@ -12,13 +6,13 @@ use Piwik\Plugins\MobileMessaging\APIException;
 use Piwik\Plugins\MobileMessaging\SMSProvider;
 use Piwik\Piwik;
 
-/** Add Sms77 to SMS providers */
-class Sms77 extends SMSProvider {
+/** Add Seven to SMS providers */
+class Seven extends SMSProvider {
     const SOCKET_TIMEOUT = 15;
 
     /** @return string */
     public function getId() {
-        return 'Sms77';
+        return 'Seven';
     }
 
     /** @return string */
@@ -39,18 +33,18 @@ class Sms77 extends SMSProvider {
                 <li>%s</li>
             </ul>
         ',
-            Piwik::translate('Sms77_HowTo', '
-            <a href=\'https://www.sms77.io\' rel=\'noreferrer noopener\' target=\'_blank\'>
-                <img alt=\'\' src=\'plugins/Sms77/images/Sms77.png\'/>
+            Piwik::translate('Seven_HowTo', '
+            <a href=\'https://www.seven.io\' rel=\'noreferrer noopener\' target=\'_blank\'>
+                <img alt=\'seven\' src=\'plugins/Seven/images/Seven.png\' width=\'220\'/>
             </a>
             '),
-            Piwik::translate('Sms77_HowTo1'),
-            Piwik::translate('Sms77_HowTo2'),
-            Piwik::translate('Sms77_HowTo3'),
-            Piwik::translate('Sms77_About'),
-            Piwik::translate('Sms77_About1'),
-            Piwik::translate('Sms77_About2'),
-            Piwik::translate('Sms77_About3'),
+            Piwik::translate('Seven_HowTo1'),
+            Piwik::translate('Seven_HowTo2'),
+            Piwik::translate('Seven_HowTo3'),
+            Piwik::translate('Seven_About'),
+            Piwik::translate('Seven_About1'),
+            Piwik::translate('Seven_About2'),
+            Piwik::translate('Seven_About3'),
         );
     }
 
@@ -59,7 +53,7 @@ class Sms77 extends SMSProvider {
         return [
             [
                 'name' => 'apiKey',
-                'title' => 'Sms77_ApiKey',
+                'title' => 'Seven_ApiKey',
                 'type' => 'text',
             ],
         ];
@@ -72,7 +66,7 @@ class Sms77 extends SMSProvider {
      */
     public function verifyCredential($credentials) {
         if (!isset($credentials['apiKey'])) {
-            throw new APIException(Piwik::translate('Sms77_ApiKeyMissing'));
+            throw new APIException(Piwik::translate('Seven_ApiKeyMissing'));
         }
 
         return 100 == $this->sms(
@@ -80,27 +74,19 @@ class Sms77 extends SMSProvider {
                 'HI2U',
                 '+490123456789',
                 'Matomo',
-                true
             );
     }
 
     /**
-     * @param array $credentials Array containing credentials
-     * @param string $text The actual message content
-     * @param string $to The recipient(s) separated by comma
-     * @param string|null $from Optional caller ID
-     * @param boolean $debug Don't send out messages
      * @return mixed
      * @throws Exception
      */
-    private function sms($credentials, $text, $to, $from, $debug = false) {
-        $debug = intval($debug);
-
+    private function sms(array $credentials, string $text, string  $to, ?string $from) {
         return $this->request(
             'POST',
             'sms',
             $credentials,
-            compact('debug', 'from', 'text', 'to')
+            compact('from', 'text', 'to')
         );
     }
 
@@ -117,34 +103,33 @@ class Sms77 extends SMSProvider {
         );
 
         if (!is_numeric($credits)  || strpos($credits, '.') === false) {
-            throw new APIException(Piwik::translate('Sms77_ApiKeyError'));
+            throw new APIException(Piwik::translate('Seven_ApiKeyError'));
         }
 
         return Piwik::translate('MobileMessaging_Available_Credits', array($credits . ' €'));
     }
 
     /**
-     * @param string $method HTTP method
-     * @param string $endpoint API endpoint
-     * @param array $credentials Array containing credentials
-     * @param array|null $body Optional request body
      * @return mixed
      * @throws Exception
      */
-    private function request($method, $endpoint, $credentials, $body = []) {
-        $isGet = 'GET' === strtoupper($method);
+    private function request(
+        string $method,
+        string $endpoint,
+        array $credentials,
+        ?array $body = []
+    ) {
+        $isGET = 'GET' === strtoupper($method);
         $apiKey = $credentials['apiKey'];
-        $body['p'] = $apiKey;
-        $body['sentWith'] = 'matomo';
-        $url = 'https://gateway.sms77.io/api/' . $endpoint;
+        $url = 'https://gateway.seven.io/api/' . $endpoint;
 
-        if ($isGet) {
+        if ($isGET) {
             $query = http_build_query($body);
             $url .= '?' . $query;
             $body = [];
         }
 
-        $res = Http::sendHttpRequestBy(
+        return Http::sendHttpRequestBy(
             Http::getTransportMethod(),
             $url,
             self::SOCKET_TIMEOUT,
@@ -159,10 +144,12 @@ class Sms77 extends SMSProvider {
             $method,
             null,
             null,
-            $body
+            $body,
+            [
+                'SentWith: Matomo',
+                'X-Api-Key: ' . $apiKey,
+            ]
         );
-
-        return $res;
     }
 
     /**
