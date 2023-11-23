@@ -15,12 +15,12 @@ going through the following steps:
    the [latest release](https://github.com/seven-io/matomo/releases/latest/download/seven-matomo-latest.zip)
 2. Extract the archive contents to /plugins relative to your Matomo installation path
 3. Go to `Settings -> System -> Plugins` and activate the plugin named `Seven`
-4. [Add a new SMS provider](screenshots/add_sms_provider.png)
-5. [Add a new phone number](screenshots/add_phone_number.png)
-6. [Validate the phone number](screenshots/validate_phone_number.png)
-7. [Create a report](screenshots/create_report.png)
+4. [Add a new SMS provider](https://raw.githubusercontent.com/seven-io/matomo/master/screenshots/add_sms_provider.png)
+5. [Add a new phone number](https://raw.githubusercontent.com/seven-io/matomo/master/screenshots/add_phone_number.png)
+6. [Validate the phone number](https://raw.githubusercontent.com/seven-io/matomo/master/screenshots/validate_phone_number.png)
+7. [Create a report](https://raw.githubusercontent.com/seven-io/matomo/master/screenshots/create_report.png)
 8. Test the workflow by clicking `Send Report now` in
-   the [Personal Email Reports](screenshots/reports_overview.png)
+   the [Personal Email Reports](https://raw.githubusercontent.com/seven-io/matomo/master/screenshots/reports_overview.png)
 
 #### Support
 
